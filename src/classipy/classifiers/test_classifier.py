@@ -56,7 +56,8 @@ class testClassifier(object):
       # p(item) = self.itemsOverview[item]['count'] / len(self.trainingData)
       # @todo: Optimization
       self.pClass[iClass] = self.classFrequency[iClass] / len(self.trainingData)
-      self.pItemClass[item][iClass] = self.itemsOverview[item]['class'][iClass] / self.itemsOverview[item]['count']
+      for tClass in self.itemsOverview[item]['class']:
+        self.pItemClass[item][tClass] = self.itemsOverview[item]['class'][tClass] / self.itemsOverview[item]['count']
       self.pItem[item] = self.itemsOverview[item]['count'] / len(self.trainingData)
 
     def initializeItemOverview(self, item):
