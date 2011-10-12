@@ -21,3 +21,8 @@ if __name__ == '__main__':
     provider = testProvider(input_data)
     classifier = testClassifier(provider.data, provider.classes)
     pp.pprint(classifier)
+    pp.pprint("foo: " + classifier.itemVerdict("foo"))
+    pp.pprint("bar: " + classifier.itemVerdict("bar"))
+    pp.pprint("monty: " + classifier.itemVerdict("monty"))
+    pp.pprint("python: " + classifier.itemVerdict("python"))
+    pp.pprint("apple: " + classifier.itemVerdict("apple"))
