@@ -9,20 +9,19 @@ class baseProvider:
     classdocs
     '''
     __metaclass__ = ABCMeta
-    def __init__(self, dataStream):
+    def __init__(self, data_stream):
         '''
         Constructor
         '''
-        self.dataStream = dataStream
+        self.data_stream = data_stream
         self.classes = []
         self.data = []
-        self.inputList = []
-    
+        self.input_list = []
+
     @abstractmethod
-    def getClasses(self):
+    def get_classes(self):
         pass
-    
+
     @abstractmethod
-    def parseDataStream(self):
-        return self.dataStream
-        
+    def parse_data_stream(self):
+        return self.data_stream

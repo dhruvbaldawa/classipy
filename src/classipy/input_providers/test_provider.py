@@ -10,41 +10,41 @@ class testProvider(baseProvider):
     '''
     A test provider class
     '''
-    def __init__(self, dataStream):
+    def __init__(self, data_stream):
         '''
         Constructor
         '''
-        self.dataStream = dataStream
-        self.parseDataStream()
+        self.data_stream = data_stream
+        self.parse_data_stream()
 
-    def getClasses(self):
+    def get_classes(self):
         '''
         @return the list of all the classes from the provider
         '''
         return self.classes
 
-    def parseDataStream(self):
+    def parse_data_stream(self):
         '''
         @return nothing
         '''
         # Creates a set for all the classes
-        tClasses = Set()
+        t_classes = Set()
 
         # Initialize data as list of input elements
         self.data = []
 
         # @todo: Optimization of the loop
-        for item in self.dataStream:
+        for item in self.data_stream:
             # Create an inputElement class and append it to the data list
             self.data.append(trainingElement(item["data"], item["class"]))
             # Add the class to the set
-            tClasses.add(item["class"])
+            t_classes.add(item["class"])
 
         # Convert the set to a list
-        self.classes = list(tClasses)
+        self.classes = list(t_classes)
 
     def __str__(self):
-      return "[classes: " + str(self.classes) + ",\ndata: " + str(self.data) + "]"
+        return "[classes: " + str(self.classes) + ",\ndata: " + str(self.data) + "]"
 
     def __repr__(self):
-      return "<classes: " + str(self.classes) + ",\ndata: " + str(self.data) + ">"
+        return "<classes: " + str(self.classes) + ",\ndata: " + str(self.data) + ">"
