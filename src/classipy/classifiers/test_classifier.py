@@ -77,7 +77,7 @@ class testClassifier(object):
         # Convert the classes list to a dictionary with classes as keys
         # of the dictionary having value 0.0 by default
         self.items_overview[item] = {"class":dict(zip(self.classes, [0.0]*len(self.classes))),
-                                            "count":0.0}
+                                     "count":0.0}
 
     def initialize_item_probabilities(self, item):
         '''
