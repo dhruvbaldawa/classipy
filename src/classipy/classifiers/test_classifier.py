@@ -2,6 +2,7 @@
 Created on Sep 26, 2011
 @author: dhruvbaldawa
 '''
+import math
 class testClassifier(object):
     '''
     classdocs
@@ -28,6 +29,7 @@ class testClassifier(object):
         self.p_item_class = {}
         self.p_item = {}
         self.p_class = {}
+        self.k = 1
 
         self.get_training()
 
@@ -39,13 +41,12 @@ class testClassifier(object):
         # Calculating the items and their subsequent classes
         self.class_frequency = dict(zip(self.classes, [0.0]*len(self.classes)))
 
-        # @todo: Optimization by replacing the object methods and properties
-        for item in self.training_data:
-            if item.get_data() not in self.items_overview:
-                self.initialize_item_overview(item.get_data())
-                self.initialize_item_probabilities(item.get_data())
+        new_dict = {}
+        for pair in dict.items():
+            if pair[1] not in new_dict.keys():
+                new_dict[pair[1]] = []
 
-            self.mark_item_occurrence(item.get_data(), item.get_class())
+            new_dict[pair[1]].append(pair[0])
 
     def mark_item_occurrence(self, item, iClass):
         '''
@@ -91,12 +92,21 @@ class testClassifier(object):
 
     def classify_item(self, item):
         # Predict the various probabilities of a particular item
-        # Returns each class and the confidence of the decision
-        if item in self.p_item:
-            return self.p_item_class[item]
-        else:
-            # @todo: Change the exception to a special class 'ItemNotFoundException'
-            raise Exception("No previous information regarding " + item)
+        p_classes = dict(zip(self.classes, [-1.0]*len(self.classes)))
+        for item in self.tokenize(item):
+            if item in self.p_item:
+                for k, v in self.p_item_class[item].items():
+                    # So that a zero doesnot turn the following multiplications
+                    # to a zero
+                    if p_classes[k] != 0 and v != 0:
+                        p_classes[k] = math.fabs(p_classes[k]) * v
+
+            else:
+                # @todo: Change the exception to a special class 'ItemNotFoundException'
+                # raise Exception("No previous information regarding " + item)
+                pass
+        # @todo: normalization of probabilities
+        return p_classes
 
     def item_verdict(self, item):
         # returns the final verdict, that is the final "class" of the item
@@ -110,6 +120,11 @@ class testClassifier(object):
                 t_max = t_frequency
                 r_class = t_class
         return r_class
+
+
+    def tokenize(self, data):
+        token_list = data.lower().split()
+        return token_list
 
     def classify_all_items(self, item_list):
         pass

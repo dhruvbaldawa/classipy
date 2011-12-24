@@ -35,13 +35,22 @@ class testProvider(baseProvider):
 
         # @todo: Optimization of the loop
         for item in self.data_stream:
-            # Create an inputElement class and append it to the data list
-            self.data.append(trainingElement(item["data"], item["class"]))
+            # @todo: Use lists automatically, if provided and don't tokenize
+            # Tokenize the string
+            token_list = self.tokenize(item["data"])
+
+            for token in token_list:
+                # Create an inputElement class and append it to the data list
+                self.data.append(trainingElement(token, item["class"]))
             # Add the class to the set
             t_classes.add(item["class"])
 
         # Convert the set to a list
         self.classes = list(t_classes)
+
+    def tokenize(self, data):
+        token_list = data.lower().split()
+        return token_list
 
     def __str__(self):
         return "[classes: " + str(self.classes) + ",\ndata: " + str(self.data) + "]"

@@ -17,12 +17,15 @@ if __name__ == '__main__':
     """
 
     pp = pprint.PrettyPrinter()
-    input_data = [{"data":"foo", "class":"yes"}, {"data":"bar", "class":"yes"}, {"data":"foo", "class":"no"}, {"data":"foo", "class":"no"}, {"data":"bar", "class":"yes"}, {"data":"bar", "class":"no"}, {"data":"monty", "class":"yes"}, {"data":"python", "class":"no"}, {"data":"monty", "class":"yes"}, {"data":"monty", "class":"no"}, {"data":"python", "class":"no"}, {"data":"python", "class":"no"}, {"data":"foo", "class":"yes"}, {"data":"foo", "class":"no"}]
+    input_data = [{"data":"a perfect world", "class":"movie"},
+                  {"data":"a perfect day", "class":"song"},
+                  {"data":"my perfect woman", "class":"movie"},
+                  {"data":"electric storm", "class":"song"},
+                  {"data":"pretty woman", "class":"movie"},
+                  {"data":"another rainy day", "class":"song"}]
     provider = testProvider(input_data)
+    print provider
     classifier = testClassifier(provider.data, provider.classes)
     pp.pprint(classifier)
-    pp.pprint("foo: " + classifier.item_verdict("foo"))
-    pp.pprint("bar: " + classifier.item_verdict("bar"))
-    pp.pprint("monty: " + classifier.item_verdict("monty"))
-    pp.pprint("python: " + classifier.item_verdict("python"))
-    pp.pprint("apple: " + classifier.item_verdict("apple"))
+    pp.pprint("my name is anthony: " + str(classifier.classify_item("anthony hello negative message")))
+
